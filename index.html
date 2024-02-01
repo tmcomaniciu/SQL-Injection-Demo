@@ -1,0 +1,40 @@
+<head>
+  <link rel="stylesheet" href="./style.css" />
+  <title>SQL Injection Demo</title>
+</head>
+<body>
+  <form action="/login" method="post">
+    <div class="container">
+      <label for="username">Username:</label><br />
+      <input type="text" name="username" id="username" required /><br />
+      <label for="password">Password:</label><br />
+      <input type="password" name="password" id="password" required /><br />
+
+      <!-- Checkbox to toggle password visibility -->
+      <input type="checkbox" id="togglePassword" /> Show Password<br />
+
+      <button type="submit">Submit</button>
+    </div>
+    <script>
+      if (document.location.hash === "#unauthorized") {
+        document.write(
+          '<div class="unauthorized">Invalid Username or Password</div>'
+        );
+      } else if (document.location.hash === "#error") {
+        document.write('<div class="error">An error has occurred</div>');
+      }
+    </script>
+    <script>
+      document
+        .getElementById("togglePassword")
+        .addEventListener("change", function (e) {
+          const passwordInput = document.getElementById("password");
+          const type =
+            passwordInput.getAttribute("type") === "password"
+              ? "text"
+              : "password";
+          passwordInput.setAttribute("type", type);
+        });
+    </script>
+  </form>
+</body>
